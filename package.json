@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "prisma generate && tsc && tsc-alias",
+    "vercel-build": "prisma generate && tsc && tsc-alias",
     "start": "node dist/server.js",
     "prisma:generate": "prisma generate",
     "prisma:seed": "tsx prisma/seed.ts"
