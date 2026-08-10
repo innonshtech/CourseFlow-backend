@@ -1,4 +1,4 @@
-import { Role } from "@/types/auth";
+import { Role } from "../types/auth";
 
 export interface UserSocialLinks {
   website?: string | null;

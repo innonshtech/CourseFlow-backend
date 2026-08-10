@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { ProfileService } from "@/services/profile.service";
-import { updateProfileSchema, changePasswordSchema } from "@/validators/profile";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { ProfileService } from "../services/profile.service";
+import { updateProfileSchema, changePasswordSchema } from "../validators/profile";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

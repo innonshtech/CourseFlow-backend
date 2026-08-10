@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
 import multer from "multer";
-import { uploadPdfFile, uploadImageFile, deleteCloudinaryFile } from "@/lib/cloudinary";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
-import { Role } from "@/types/auth";
+import { uploadPdfFile, uploadImageFile, deleteCloudinaryFile } from "../lib/cloudinary";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
+import { Role } from "../types/auth";
 
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage() });

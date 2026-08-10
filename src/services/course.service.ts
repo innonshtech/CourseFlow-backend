@@ -1,16 +1,16 @@
-import { prisma } from "@/lib/prisma";
-import { ApiError } from "@/types/api";
-import { deleteCloudinaryFile } from "@/lib/cloudinary";
+import { prisma } from "../lib/prisma";
+import { ApiError } from "../types/api";
+import { deleteCloudinaryFile } from "../lib/cloudinary";
 import {
   Course,
   CreateCourseInput,
   UpdateCourseInput,
   CourseFilterParams,
   PaginatedCoursesResponse,
-} from "@/types/course";
-import { slugify } from "@/validators/course";
-import { Role } from "@/types/auth";
-import { NotificationService } from "@/services/notification.service";
+} from "../types/course";
+import { slugify } from "../validators/course";
+import { Role } from "../types/auth";
+import { NotificationService } from "../services/notification.service";
 
 export class CourseService {
   /**

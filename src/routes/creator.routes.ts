@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { CreatorDashboardService } from "@/services/creator-dashboard.service";
-import { CreatorAnalyticsService } from "@/services/analytics.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate, requireCreator } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { CreatorDashboardService } from "../services/creator-dashboard.service";
+import { CreatorAnalyticsService } from "../services/analytics.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate, requireCreator } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

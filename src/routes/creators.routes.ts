@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
-import { CreatorService } from "@/services/creator.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
+import { CreatorService } from "../services/creator.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
 
 const router = Router();
 

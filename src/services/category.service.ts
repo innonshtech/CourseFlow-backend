@@ -1,12 +1,12 @@
-import { prisma } from "@/lib/prisma";
-import { ApiError } from "@/types/api";
+import { prisma } from "../lib/prisma";
+import { ApiError } from "../types/api";
 import {
   Category,
   CreateCategoryInput,
   UpdateCategoryInput,
   CategoryFilterParams,
   PaginatedCategoriesResponse,
-} from "@/types/category";
+} from "../types/category";
 
 export class CategoryService {
   /**

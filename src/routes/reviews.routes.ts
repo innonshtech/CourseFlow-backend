@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { ReviewService } from "@/services/review.service";
-import { createReviewSchema, updateReviewSchema } from "@/validators/review";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate, optionalAuthenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { ReviewService } from "../services/review.service";
+import { createReviewSchema, updateReviewSchema } from "../validators/review";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate, optionalAuthenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

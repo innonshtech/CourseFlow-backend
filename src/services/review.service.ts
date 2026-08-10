@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
-import { ApiError } from "@/types/api";
-import { Role } from "@/types/auth";
-import { NotificationService } from "@/services/notification.service";
+import { prisma } from "../lib/prisma";
+import { ApiError } from "../types/api";
+import { Role } from "../types/auth";
+import { NotificationService } from "../services/notification.service";
 import {
   CreateReviewInput,
   UpdateReviewInput,
@@ -9,7 +9,7 @@ import {
   CourseReviewsResponse,
   RatingDistribution,
   Review,
-} from "@/types/review";
+} from "../types/review";
 
 export class ReviewService {
   /**

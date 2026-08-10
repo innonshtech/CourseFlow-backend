@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
-import { Role, CreatorVerificationStatus } from "@/types/auth";
-import { ApiError } from "@/types/api";
-import { NotificationService } from "@/services/notification.service";
+import { prisma } from "../lib/prisma";
+import { Role, CreatorVerificationStatus } from "../types/auth";
+import { ApiError } from "../types/api";
+import { NotificationService } from "../services/notification.service";
 
 export interface AdminPlatformOverview {
   stats: {

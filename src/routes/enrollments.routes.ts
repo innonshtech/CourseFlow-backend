@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { PaymentService } from "@/services/payment.service";
-import { LearningService } from "@/services/learning.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { PaymentService } from "../services/payment.service";
+import { LearningService } from "../services/learning.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

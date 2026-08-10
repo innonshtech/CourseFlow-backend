@@ -1,8 +1,8 @@
 import crypto from "crypto";
-import { prisma } from "@/lib/prisma";
-import { hashPassword } from "@/utils/password";
-import { sendPasswordResetEmail } from "@/lib/mail";
-import { ApiError } from "@/types/api";
+import { prisma } from "../lib/prisma";
+import { hashPassword } from "../utils/password";
+import { sendPasswordResetEmail } from "../lib/mail";
+import { ApiError } from "../types/api";
 
 const TOKEN_EXPIRY_MS = 60 * 60 * 1000; // 1 hour
 

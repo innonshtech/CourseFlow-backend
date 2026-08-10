@@ -1,10 +1,10 @@
-import { prisma } from "@/lib/prisma";
-import { hashPassword, comparePassword } from "@/utils/password";
-import { generateToken } from "@/utils/jwt";
-import { ApiError } from "@/types/api";
-import { AuthSuccessData, UserResponseDto, Role, CreatorVerificationStatus } from "@/types/auth";
-import { RegisterInput, LoginInput } from "@/validators/auth";
-import { NotificationService } from "@/services/notification.service";
+import { prisma } from "../lib/prisma";
+import { hashPassword, comparePassword } from "../utils/password";
+import { generateToken } from "../utils/jwt";
+import { ApiError } from "../types/api";
+import { AuthSuccessData, UserResponseDto, Role, CreatorVerificationStatus } from "../types/auth";
+import { RegisterInput, LoginInput } from "../validators/auth";
+import { NotificationService } from "../services/notification.service";
 
 export class AuthService {
   /**

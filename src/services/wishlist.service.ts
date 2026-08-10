@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { ApiError } from "@/types/api";
+import { prisma } from "../lib/prisma";
+import { ApiError } from "../types/api";
 
 export class WishlistService {
   /**

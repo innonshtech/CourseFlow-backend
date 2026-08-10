@@ -1,10 +1,10 @@
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import { prisma } from "@/lib/prisma";
-import { CartService } from "@/services/cart.service";
-import { ApiError } from "@/types/api";
-import { Role } from "@/types/auth";
-import { NotificationService } from "@/services/notification.service";
+import { prisma } from "../lib/prisma";
+import { CartService } from "../services/cart.service";
+import { ApiError } from "../types/api";
+import { Role } from "../types/auth";
+import { NotificationService } from "../services/notification.service";
 
 const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_creator_space_key";
 const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "test_secret_creator_space";

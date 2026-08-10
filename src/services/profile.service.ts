@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
-import { ApiError } from "@/types/api";
-import { hashPassword, comparePassword } from "@/utils/password";
-import { UpdateProfileSchemaInput, ChangePasswordSchemaInput } from "@/validators/profile";
+import { prisma } from "../lib/prisma";
+import { ApiError } from "../types/api";
+import { hashPassword, comparePassword } from "../utils/password";
+import { UpdateProfileSchemaInput, ChangePasswordSchemaInput } from "../validators/profile";
 
 export class ProfileService {
   static async getProfile(userId: string) {

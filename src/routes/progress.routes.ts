@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { ProgressService } from "@/services/progress.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { ProgressService } from "../services/progress.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

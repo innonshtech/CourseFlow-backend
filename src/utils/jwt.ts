@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Response } from "express";
-import { JwtPayload } from "@/types/auth";
-import { ApiError } from "@/types/api";
+import { JwtPayload } from "../types/auth";
+import { ApiError } from "../types/api";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret";
 const TOKEN_EXPIRY = "7d";

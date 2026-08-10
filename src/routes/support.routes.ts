@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { optionalAuthenticate } from "@/middlewares/auth.middleware";
-import { NotificationService } from "@/services/notification.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { optionalAuthenticate } from "../middlewares/auth.middleware";
+import { NotificationService } from "../services/notification.service";
 import { z } from "zod";
 
 const router = Router();

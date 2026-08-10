@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/prisma";
-import { deleteCloudinaryFile } from "@/lib/cloudinary";
-import { ApiError } from "@/types/api";
+import { prisma } from "../lib/prisma";
+import { deleteCloudinaryFile } from "../lib/cloudinary";
+import { ApiError } from "../types/api";
 import {
   Lesson,
   CreateLessonInput,
@@ -8,8 +8,8 @@ import {
   LessonFilterParams,
   PaginatedLessonsResponse,
   ReorderLessonItem,
-} from "@/types/lesson";
-import { NotificationService } from "@/services/notification.service";
+} from "../types/lesson";
+import { NotificationService } from "../services/notification.service";
 
 export class LessonService {
   /**

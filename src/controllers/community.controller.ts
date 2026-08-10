@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CommunityService } from "@/services/community.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
+import { CommunityService } from "../services/community.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
 
 export class CommunityController {
   /**

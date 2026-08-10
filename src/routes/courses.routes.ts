@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { CourseService } from "@/services/course.service";
-import { LessonService } from "@/services/lesson.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate, optionalAuthenticate, requireCreator } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { CourseService } from "../services/course.service";
+import { LessonService } from "../services/lesson.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate, optionalAuthenticate, requireCreator } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

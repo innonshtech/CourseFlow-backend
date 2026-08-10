@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { StudentDashboardService } from "@/services/student-dashboard.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { requireStudent } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { StudentDashboardService } from "../services/student-dashboard.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { requireStudent } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 

@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { NotificationService } from "@/services/notification.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { NotificationService } from "../services/notification.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 
@@ -10,7 +10,7 @@ router.get("/", authenticate, async (req: Request, res: Response) => {
   try {
     if (!req.user) throw ApiError.unauthorized("Authentication required");
     const notifications = await NotificationService.getUserNotifications(req.user.id);
-    const unreadCount = notifications.filter((n) => !n.isRead).length;
+    const unreadCount = notifications.filter((n: { isRead?: boolean }) => !n.isRead).length;
     return sendSuccess(res, { notifications, unreadCount }, "Notifications retrieved");
   } catch (error) {
     return handleApiError(res, error);

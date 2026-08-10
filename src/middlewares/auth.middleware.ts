@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { AUTH_COOKIE_NAME, verifyToken } from "@/utils/jwt";
-import { ApiError } from "@/types/api";
-import { Role } from "@/types/auth";
-import { prisma } from "@/lib/prisma";
+import { AUTH_COOKIE_NAME, verifyToken } from "../utils/jwt";
+import { ApiError } from "../types/api";
+import { Role } from "../types/auth";
+import { prisma } from "../lib/prisma";
 
 export function authenticate(req: Request, res: Response, next: NextFunction) {
   let token = req.cookies?.[AUTH_COOKIE_NAME];

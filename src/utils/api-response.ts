@@ -1,6 +1,6 @@
 import { Response } from "express";
 import { ZodError } from "zod";
-import { ApiError, ApiResponse } from "@/types/api";
+import { ApiError, ApiResponse } from "../types/api";
 
 /**
  * Returns a standardized success HTTP response in Express.

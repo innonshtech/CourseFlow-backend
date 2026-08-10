@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
-import { CategoryService } from "@/services/category.service";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { requireAdmin } from "@/middlewares/auth.middleware";
+import { CategoryService } from "../services/category.service";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { requireAdmin } from "../middlewares/auth.middleware";
 
 const router = Router();
 

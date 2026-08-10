@@ -1,5 +1,5 @@
-import { prisma } from "@/lib/prisma";
-import { Role } from "@/types/auth";
+import { prisma } from "../lib/prisma";
+import { Role } from "../types/auth";
 
 export interface CreateNotificationInput {
   recipientId: string;

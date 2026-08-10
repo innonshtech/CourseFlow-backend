@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
+import { prisma } from "../lib/prisma";
 import { Role, CommunityPostType } from "@prisma/client";
-import { ApiError } from "@/types/api";
-import { NotificationService } from "@/services/notification.service";
+import { ApiError } from "../types/api";
+import { NotificationService } from "../services/notification.service";
 
 export interface CreateCommunityPostInput {
   title: string;
