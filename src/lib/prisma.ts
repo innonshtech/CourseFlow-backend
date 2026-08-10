@@ -13,7 +13,18 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is not defined in environment variables");
 }
 
-const pool = new Pool({ connectionString });
+const isRemoteDb =
+  process.env.NODE_ENV === "production" ||
+  connectionString.includes("supabase.co") ||
+  connectionString.includes("render.com") ||
+  connectionString.includes("railway.app") ||
+  connectionString.includes("sslmode=");
+
+const pool = new Pool({
+  connectionString,
+  ...(isRemoteDb ? { ssl: { rejectUnauthorized: false } } : {}),
+});
+
 const adapter = new PrismaPg(pool);
 
 export const prisma =
