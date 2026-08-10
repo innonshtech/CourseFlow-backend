@@ -238,7 +238,7 @@ export class LearningService {
   /**
    * Get authorized single lesson with navigation (Next / Previous)
    */
-  static async getLesson(userId: string | null, lessonId: string) {
+  static async getLesson(userId: string | null, lessonId: string, userRole?: string | null) {
     const lesson = await prisma.lesson.findUnique({
       where: { id: lessonId },
       include: {
@@ -255,12 +255,17 @@ export class LearningService {
       },
     });
 
-    if (!lesson || !lesson.isPublished) {
+    if (!lesson) {
+      throw ApiError.notFound("Lesson not found");
+    }
+
+    const isCreator = userId ? (lesson.course.creatorId === userId || userRole === "ADMIN") : false;
+
+    if (!lesson.isPublished && !isCreator) {
       throw ApiError.notFound("Lesson not found or unavailable");
     }
 
     let isEnrolled = false;
-    const isCreator = userId ? lesson.course.creatorId === userId : false;
 
     if (userId) {
       const enrollment = await prisma.enrollment.findUnique({
@@ -313,6 +318,7 @@ export class LearningService {
         duration: lesson.duration,
         order: lesson.order,
         isPreview: lesson.isPreview,
+        isPublished: lesson.isPublished,
         courseId: lesson.courseId,
         createdAt: lesson.createdAt,
       },

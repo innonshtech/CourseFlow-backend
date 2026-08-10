@@ -35,16 +35,9 @@ router.post("/reorder", requireCreator, async (req: Request, res: Response) => {
 router.get("/:id", optionalAuthenticate, async (req: Request, res: Response) => {
   try {
     const userId = req.user?.id || null;
-    if (req.user && (req.user.role === "CREATOR" || req.user.role === "ADMIN")) {
-      try {
-        const creatorLesson = await LessonService.getLessonById(req.user.id, req.params.id);
-        return sendSuccess(res, { lesson: creatorLesson }, "Lesson retrieved successfully");
-      } catch {
-        // Fallback to learning service for non-creator/enrolled student
-      }
-    }
-    const lesson = await LearningService.getLesson(userId, req.params.id);
-    return sendSuccess(res, { lesson }, "Lesson retrieved successfully");
+    const userRole = req.user?.role || null;
+    const lessonData = await LearningService.getLesson(userId, req.params.id, userRole);
+    return sendSuccess(res, lessonData, "Lesson retrieved successfully");
   } catch (error) {
     return handleApiError(res, error);
   }
