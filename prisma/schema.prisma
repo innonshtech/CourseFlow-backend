@@ -1,0 +1,397 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  CREATOR
+  STUDENT
+}
+
+enum CreatorVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model User {
+  id                 String  @id @default(cuid())
+  name               String
+  email              String  @unique
+  password           String
+  role               Role    @default(STUDENT)
+
+  profileImage       String?
+  bio                String?
+  phone              String?
+  creatorDescription String?
+  displayName        String?
+  termsAccepted      Boolean @default(false)
+
+  // Creator Verification
+  verificationStatus CreatorVerificationStatus? @default(PENDING)
+  approvedAt         DateTime?
+  approvedBy         String?
+  rejectionReason    String?
+
+  // Creator Social Links
+  website   String?
+  youtube   String?
+  linkedin  String?
+  instagram String?
+
+  createdCourses Course[]
+  enrollments    Enrollment[]
+  payments       Payment[]
+  reviews        Review[]
+  wishlists      Wishlist[]
+  cart           Cart?
+  lessonProgress LessonProgress[]
+  passwordResetTokens PasswordResetToken[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  orders    Order[]
+  notifications Notification[]
+  communityPosts CommunityPost[]
+  communityPostLikes CommunityPostLike[]
+}
+
+model Category {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  slug        String  @unique
+  description String?
+  image       String?
+  isActive    Boolean @default(true)
+
+  courses Course[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id String @id @default(cuid())
+
+  title       String
+  slug        String @unique
+  description String
+  price       Float
+  discountPrice Float?
+
+  thumbnailUrl  String?
+  level         CourseLevel @default(BEGINNER)
+  language      String      @default("English")
+
+  isPublished   Boolean     @default(false)
+  isFreePreview Boolean     @default(false)
+
+  duration      String?
+  totalLessons  Int         @default(0)
+
+  averageRating Float       @default(0)
+  totalStudents Int         @default(0)
+
+  creatorId String
+  creator   User   @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  lessons     Lesson[]
+  enrollments Enrollment[]
+  order       Order[]
+  orderItems  OrderItem[]
+  payments    Payment[]
+  reviews     Review[]
+  wishlists   Wishlist[]
+  cartItems   CartItem[]
+  communityPosts CommunityPost[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id           String  @id @default(cuid())
+  title        String
+  description  String?
+  videoUrl     String
+  pdfUrl       String?
+  duration     Int?
+  totalLessons Int     @default(0)
+
+  order       Int
+  isPreview   Boolean @default(false)
+  isPublished Boolean @default(false)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  progress LessonProgress[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Enrollment {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  lastLessonId String?
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model LessonProgress {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  lessonId String
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+}
+
+model Order {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  courseId String?
+  course   Course? @relation(fields: [courseId], references: [id])
+
+  totalAmount     Float
+  status          PaymentStatus @default(PENDING)
+  razorpayOrderId String?
+
+  items   OrderItem[]
+  payment Payment?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  price Float
+}
+
+model Payment {
+  id String @id @default(cuid())
+
+  amount Float
+
+  currency String @default("INR")
+
+  status PaymentStatus @default(PENDING)
+
+  razorpayPaymentId String?
+  razorpaySignature String?
+
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  courseId String?
+  course   Course? @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id String @id @default(cuid())
+
+  rating  Int
+  comment String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model Wishlist {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model Coupon {
+  id String @id @default(cuid())
+
+  code        String  @unique
+  description String?
+
+  discount Float
+
+  isPercentage Boolean @default(true)
+
+  maxUses   Int?
+  usedCount Int  @default(0)
+
+  expiresAt DateTime?
+
+  isActive Boolean @default(true)
+
+  carts Cart[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cart {
+  id String @id @default(cuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  couponId String?
+  coupon   Coupon? @relation(fields: [couponId], references: [id], onDelete: SetNull)
+
+  items CartItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id String @id @default(cuid())
+
+  cartId String
+  cart   Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([cartId, courseId])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+model Notification {
+  id            String   @id @default(cuid())
+  recipientId   String
+  recipientRole Role
+  title         String
+  message       String
+  type          String
+  isRead        Boolean  @default(false)
+  link          String?
+  createdAt     DateTime @default(now())
+
+  recipient     User     @relation(fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([recipientId])
+  @@index([recipientRole])
+}
+
+enum CommunityPostType {
+  ANNOUNCEMENT
+  POST
+}
+
+model CommunityPost {
+  id        String            @id @default(cuid())
+  courseId  String
+  course    Course            @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User              @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  type      CommunityPostType @default(POST)
+
+  likes     CommunityPostLike[]
+
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@index([courseId])
+  @@index([authorId])
+}
+
+model CommunityPostLike {
+  id        String        @id @default(cuid())
+  postId    String
+  post      CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime      @default(now())
+
+  @@unique([postId, userId])
+  @@index([postId])
+  @@index([userId])
+}
+
+
