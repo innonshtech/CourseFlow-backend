@@ -1,11 +1,11 @@
 import { Router, Request, Response } from "express";
-import { AuthService } from "@/services/auth.service";
-import { PasswordResetService } from "@/services/password-reset.service";
-import { loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from "@/validators/auth";
-import { setAuthCookie, clearAuthCookie } from "@/utils/jwt";
-import { sendSuccess, handleApiError } from "@/utils/api-response";
-import { authenticate } from "@/middlewares/auth.middleware";
-import { ApiError } from "@/types/api";
+import { AuthService } from "../services/auth.service";
+import { PasswordResetService } from "../services/password-reset.service";
+import { loginSchema, registerSchema, forgotPasswordSchema, resetPasswordSchema } from "../validators/auth";
+import { setAuthCookie, clearAuthCookie } from "../utils/jwt";
+import { sendSuccess, handleApiError } from "../utils/api-response";
+import { authenticate } from "../middlewares/auth.middleware";
+import { ApiError } from "../types/api";
 
 const router = Router();
 
